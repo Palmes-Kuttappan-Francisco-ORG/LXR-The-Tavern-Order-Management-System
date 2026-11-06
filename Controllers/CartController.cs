@@ -16,28 +16,29 @@ namespace Lucas_The_Tavern_Order_Management_System.Controllers
 
         public IActionResult Index()
         {
-            return View(_db.CartItems.ToList());
+            var cartItems = _db.CartItems.ToList();
+            return View(cartItems);
         }
 
         [HttpPost]
-        public IActionResult Add(int productId)
+        [ValidateAntiForgeryToken]
+        public IActionResult Add(int menuItemId)
         {
-            var product = _db.Products.Find(productId);
+            var menuItem = _db.MenuItems.Find(menuItemId);
 
-            if (product == null)
-                return RedirectToAction("Index", "Products");
+            if (menuItem == null || !menuItem.IsAvailable)
+                return RedirectToAction("Index", "MenuItems");
 
-            var item = _db.CartItems.FirstOrDefault(
-                c => c.ProductID == productId
-            );
+            var item = _db.CartItems
+                .FirstOrDefault(c => c.MenuItemID == menuItemId);
 
             if (item == null)
             {
                 _db.CartItems.Add(new CartItem
                 {
-                    ProductID = product.ID,
-                    ProductName = product.Name,
-                    Price = product.Price,
+                    MenuItemID = menuItem.Id,
+                    MenuItemName = menuItem.Name,
+                    Price = menuItem.Price,
                     Quantity = 1
                 });
             }
@@ -47,11 +48,11 @@ namespace Lucas_The_Tavern_Order_Management_System.Controllers
             }
 
             _db.SaveChanges();
-
             return RedirectToAction("Index");
         }
 
         [HttpPost]
+        [ValidateAntiForgeryToken]
         public IActionResult UpdateQuantity(int id, int quantity)
         {
             var item = _db.CartItems.Find(id);
@@ -66,6 +67,7 @@ namespace Lucas_The_Tavern_Order_Management_System.Controllers
         }
 
         [HttpPost]
+        [ValidateAntiForgeryToken]
         public IActionResult Remove(int id)
         {
             var item = _db.CartItems.Find(id);

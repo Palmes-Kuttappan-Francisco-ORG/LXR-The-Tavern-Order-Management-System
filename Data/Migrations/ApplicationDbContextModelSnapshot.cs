@@ -43,14 +43,14 @@ namespace Lucas_The_Tavern_Order_Management_System.Data.Migrations
                         .ValueGeneratedOnAdd()
                         .HasColumnType("INTEGER");
 
-                    b.Property<decimal>("Price")
-                        .HasColumnType("TEXT");
-
-                    b.Property<int>("ProductID")
+                    b.Property<int>("MenuItemID")
                         .HasColumnType("INTEGER");
 
-                    b.Property<string>("ProductName")
+                    b.Property<string>("MenuItemName")
                         .IsRequired()
+                        .HasColumnType("TEXT");
+
+                    b.Property<decimal>("Price")
                         .HasColumnType("TEXT");
 
                     b.Property<int>("Quantity")
@@ -61,9 +61,9 @@ namespace Lucas_The_Tavern_Order_Management_System.Data.Migrations
                     b.ToTable("CartItems");
                 });
 
-            modelBuilder.Entity("Lucas_The_Tavern_Order_Management_System.Models.Product", b =>
+            modelBuilder.Entity("Lucas_The_Tavern_Order_Management_System.Models.MenuItem", b =>
                 {
-                    b.Property<int>("ID")
+                    b.Property<int>("Id")
                         .ValueGeneratedOnAdd()
                         .HasColumnType("INTEGER");
 
@@ -72,19 +72,24 @@ namespace Lucas_The_Tavern_Order_Management_System.Data.Migrations
                         .HasColumnType("TEXT");
 
                     b.Property<string>("Description")
-                        .IsRequired()
                         .HasColumnType("TEXT");
+
+                    b.Property<string>("ImageUrl")
+                        .HasColumnType("TEXT");
+
+                    b.Property<bool>("IsAvailable")
+                        .HasColumnType("INTEGER");
 
                     b.Property<string>("Name")
                         .IsRequired()
                         .HasColumnType("TEXT");
 
                     b.Property<decimal>("Price")
-                        .HasColumnType("TEXT");
+                        .HasColumnType("decimal(10,2)");
 
-                    b.HasKey("ID");
+                    b.HasKey("Id");
 
-                    b.ToTable("Products");
+                    b.ToTable("MenuItems");
                 });
 #pragma warning restore 612, 618
         }

@@ -1,0 +1,128 @@
+
+@model IEnumerable<Lucas_The_Tavern_Order_Management_System.Models.CartItem>
+
+@{
+    ViewData["Title"] = "Shopping Cart";
+
+    decimal total = Model.Sum(item => item.Price * item.Quantity);
+}
+
+<div class="container mt-4">
+
+    <h1 class="text-center mb-4">Your Shopping Cart</h1>
+
+    @if (!Model.Any())
+    {
+        <div class="alert alert-info text-center">
+            <h4>Your cart is empty!</h4>
+            <p>Browse our menu and add your favorite meals.</p>
+
+            <a asp-controller="MenuItems"
+               asp-action="Index"
+               class="btn btn-primary">
+                Browse Menu
+            </a>
+        </div>
+    }
+    else
+    {
+        <div class="table-responsive">
+
+            <table class="table table-bordered table-hover">
+
+                <thead class="table-dark">
+                    <tr>
+                        <th>Food Item</th>
+                        <th>Price</th>
+                        <th>Quantity</th>
+                        <th>Subtotal</th>
+                        <th>Action</th>
+                    </tr>
+                </thead>
+
+                <tbody>
+
+                    @foreach (var item in Model)
+                    {
+                        <tr>
+                            <td>@item.MenuItemName</td>
+
+                            <td>
+                                @item.Price.ToString("C2",
+                                    System.Globalization.CultureInfo.GetCultureInfo("en-PH"))
+                            </td>
+
+                            <td>
+                                <form asp-action="UpdateQuantity"
+                                      method="post"
+                                      class="d-flex gap-2">
+
+                                    <input type="hidden"
+                                           name="id"
+                                           value="@item.ID" />
+
+                                    <input type="number"
+                                           name="quantity"
+                                           value="@item.Quantity"
+                                           min="1"
+                                           class="form-control"
+                                           style="width:80px;" />
+
+                                    <button type="submit"
+                                            class="btn btn-warning btn-sm">
+                                        Update
+                                    </button>
+                                </form>
+                            </td>
+
+                            <td>
+                                @((item.Price * item.Quantity).ToString("C2",
+                                    System.Globalization.CultureInfo.GetCultureInfo("en-PH")))
+                            </td>
+
+                            <td>
+                                <form asp-action="Remove"
+                                      method="post">
+
+                                    <input type="hidden"
+                                           name="id"
+                                           value="@item.ID" />
+
+                                    <button type="submit"
+                                            class="btn btn-danger btn-sm">
+                                        Remove
+                                    </button>
+                                </form>
+                            </td>
+                        </tr>
+                    }
+
+                </tbody>
+
+                <tfoot>
+                    <tr>
+                        <td colspan="3" class="text-end">
+                            <strong>Grand Total:</strong>
+                        </td>
+
+                        <td colspan="2">
+                            <strong class="text-success">
+                                @total.ToString("C2",
+                                    System.Globalization.CultureInfo.GetCultureInfo("en-PH"))
+                            </strong>
+                        </td>
+                    </tr>
+                </tfoot>
+
+            </table>
+
+        </div>
+
+        <a asp-controller="MenuItems"
+           asp-action="Index"
+           class="btn btn-secondary">
+            Continue Shopping
+        </a>
+    }
+
+</div>

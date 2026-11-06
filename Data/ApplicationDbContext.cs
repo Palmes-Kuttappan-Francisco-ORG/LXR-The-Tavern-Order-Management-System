@@ -11,9 +11,8 @@ public class ApplicationDbContext : DbContext
         : base(options)
     {
     }
-
-    public DbSet<Product> Products { get; set; } = null!;
     public DbSet<CartItem> CartItems { get; set; } = null!;
+    public DbSet<MenuItem> MenuItems { get; set; }
 
 public DbSet<Customer> Customer { get; set; } = default!;
 }
