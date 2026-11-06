@@ -4,3 +4,33 @@
 <h1>@ViewData["Title"]</h1>
 
 <p>Use this page to detail your site's privacy policy.</p>
+@{
+    ViewData["Title"] = "Privacy Policy";
+}
+<h1>@ViewData\\\\\\\["Title"]</h1>
+
+<p>Use this page to detail your site's privacy policy.</p>
+
+
+---NAVIGATION BAR---
+> Views > Shared > Layout.cshtml
+find <ul class="navbar-nav flex-grow-1">
+replace everything inside it specifically: (the Home and Privacy <li>s) with:
+// replaced
+
+                        <li class="nav-item">
+                            <a class="nav-link text-dark"
+                               asp-controller="Products"
+                               asp-action="Index">
+                                Products
+                            </a>
+                        </li>
+
+                        <li class="nav-item">
+                            <a class="nav-link text-dark"
+                               asp-controller="Cart"
+                               asp-action="Index">
+                                Cart
+                            </a>
+                        </li>
+
