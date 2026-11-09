@@ -1,4 +1,4 @@
-namespace Lucas_The_Tavern_Order_Management_System.Models;
+namespace LXR_The_Tavern_Order_Management_System.Models;
 
 public class CartItem
 {

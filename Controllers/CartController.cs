@@ -1,9 +1,9 @@
 
 using Microsoft.AspNetCore.Mvc;
-using Lucas_The_Tavern_Order_Management_System.Data;
-using Lucas_The_Tavern_Order_Management_System.Models;
+using LXR_The_Tavern_Order_Management_System.Data;
+using LXR_The_Tavern_Order_Management_System.Models;
 
-namespace Lucas_The_Tavern_Order_Management_System.Controllers
+namespace LXR_The_Tavern_Order_Management_System.Controllers
 {
     public class CartController : Controller
     {

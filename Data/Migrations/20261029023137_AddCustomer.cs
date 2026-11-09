@@ -3,7 +3,7 @@ using Microsoft.EntityFrameworkCore.Migrations;
 
 #nullable disable
 
-namespace Lucas_The_Tavern_Order_Management_System.Data.Migrations
+namespace LXR_The_Tavern_Order_Management_System.Data.Migrations
 {
     /// <inheritdoc />
     public partial class AddCustomer : Migration
