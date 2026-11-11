@@ -41,7 +41,6 @@
                 </thead>
 
                 <tbody>
-
                     @foreach (var item in Model)
                     {
                         <tr>
@@ -96,7 +95,6 @@
                             </td>
                         </tr>
                     }
-
                 </tbody>
 
                 <tfoot>
@@ -118,11 +116,21 @@
 
         </div>
 
-        <a asp-controller="MenuItems"
-           asp-action="Index"
-           class="btn btn-secondary">
-            Continue Shopping
-        </a>
+        <div class="d-flex gap-2 mt-3">
+
+            <a asp-controller="MenuItems"
+               asp-action="Index"
+               class="btn btn-secondary">
+                Continue Shopping
+            </a>
+
+            <a asp-controller="Cart"
+               asp-action="Checkout"
+               class="btn btn-success">
+                Proceed to Checkout
+            </a>
+
+        </div>
     }
 
 </div>

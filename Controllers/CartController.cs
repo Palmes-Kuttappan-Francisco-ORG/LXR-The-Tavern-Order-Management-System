@@ -20,6 +20,54 @@ namespace LXR_The_Tavern_Order_Management_System.Controllers
             return View(cartItems);
         }
 
+        // DISPLAY CHECKOUT FORM
+        [HttpGet]
+        public IActionResult Checkout()
+        {
+            if (!_db.CartItems.Any())
+                return RedirectToAction("Index");
+
+            return View(new CheckoutViewModel());
+        }
+
+        // PROCESS CHECKOUT FORM
+        [HttpPost]
+        [ValidateAntiForgeryToken]
+        public IActionResult Checkout(CheckoutViewModel model)
+        {
+            var cartItems = _db.CartItems.ToList();
+
+            if (!cartItems.Any())
+                return RedirectToAction("Index");
+
+            if (!ModelState.IsValid)
+                return View(model);
+
+            var orderNumber = "LXR-" + DateTime.Now.ToString("yyyyMMddHHmmss")
+                + "-" + Guid.NewGuid().ToString("N").Substring(0, 4).ToUpper();
+
+            var order = new Order
+            {
+                Name = model.Name,
+                PaymentMethod = model.PaymentMethod,
+                OrderNumber = orderNumber,
+                OrderDate = DateTime.Now,
+                TotalAmount = cartItems.Sum(item => item.Price * item.Quantity),
+                OrderItems = cartItems.Select(item => new OrderItem
+                {
+                    MenuItemID = item.MenuItemID,
+                    MenuItemName = item.MenuItemName,
+                    Price = item.Price,
+                    Quantity = item.Quantity
+                }).ToList()
+            };
+
+            _db.Orders.Add(order);
+            _db.CartItems.RemoveRange(cartItems);
+            _db.SaveChanges();
+
+return RedirectToAction("Confirmation", "Orders", new { id = order.Id });        }
+
         [HttpPost]
         [ValidateAntiForgeryToken]
         public IActionResult Add(int menuItemId)
