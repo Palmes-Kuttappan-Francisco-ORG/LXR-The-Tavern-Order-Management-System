@@ -11,6 +11,10 @@ public class ApplicationDbContext(
     public DbSet<CartItem> CartItems { get; set; } = null!;
     public DbSet<MenuItem> MenuItems { get; set; } = null!;
     public DbSet<Customer> Customer { get; set; } = null!;
+
+public DbSet<Order> Orders { get; set; } = null!;
+public DbSet<OrderItem> OrderItems { get; set; } = null!;
+
 }
 
 

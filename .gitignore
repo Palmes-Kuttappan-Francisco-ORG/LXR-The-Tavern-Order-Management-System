@@ -433,3 +433,6 @@ FodyWeavers.xsd
 
 # Git error logs
 git-error-*
+# Local SQLite database and backup
+app.db
+app.db.backup
