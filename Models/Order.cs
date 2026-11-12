@@ -1,8 +1,10 @@
 
 using System.ComponentModel.DataAnnotations;
+using Microsoft.EntityFrameworkCore;
 
 namespace LXR_The_Tavern_Order_Management_System.Models;
 
+[Index(nameof(OrderNumber), IsUnique = true)]
 public class Order
 {
     public int Id { get; set; }
