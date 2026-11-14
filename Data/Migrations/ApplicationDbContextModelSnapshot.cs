@@ -100,6 +100,14 @@ namespace LXR_The_Tavern_Order_Management_System.Data.Migrations
                         .ValueGeneratedOnAdd()
                         .HasColumnType("INTEGER");
 
+                    b.Property<string>("MayaCheckoutId")
+                        .HasMaxLength(100)
+                        .HasColumnType("TEXT");
+
+                    b.Property<string>("MayaRequestReference")
+                        .HasMaxLength(100)
+                        .HasColumnType("TEXT");
+
                     b.Property<string>("Name")
                         .IsRequired()
                         .HasMaxLength(100)
@@ -114,6 +122,11 @@ namespace LXR_The_Tavern_Order_Management_System.Data.Migrations
 
                     b.Property<string>("PaymentMethod")
                         .IsRequired()
+                        .HasColumnType("TEXT");
+
+                    b.Property<string>("PaymentStatus")
+                        .IsRequired()
+                        .HasMaxLength(20)
                         .HasColumnType("TEXT");
 
                     b.Property<decimal>("TotalAmount")
