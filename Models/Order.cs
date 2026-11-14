@@ -1,4 +1,3 @@
-
 using System.ComponentModel.DataAnnotations;
 using Microsoft.EntityFrameworkCore;
 
@@ -22,6 +21,15 @@ public class Order
     public DateTime OrderDate { get; set; }
 
     public decimal TotalAmount { get; set; }
+
+    [StringLength(20)]
+    public string PaymentStatus { get; set; } = "Pending";
+
+    [StringLength(100)]
+    public string? MayaCheckoutId { get; set; }
+
+    [StringLength(100)]
+    public string? MayaRequestReference { get; set; }
 
     public ICollection<OrderItem> OrderItems { get; set; } = new List<OrderItem>();
 }

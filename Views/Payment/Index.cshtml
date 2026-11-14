@@ -1,26 +1,29 @@
+
 @{
     ViewData["Title"] = "Maya Payment";
 }
 
-<div class="container mt-5">
-    <div class="card shadow p-4 mx-auto" style="max-width: 600px;">
-        <h2 class="text-center">Maya Checkout</h2>
+<div class="container mt-4">
+    <h2>Maya Payment</h2>
 
-        @if (ViewBag.Error != null)
-        {
-            <div class="alert alert-danger">
-                @ViewBag.Error
-            </div>
-        }
+    @if (ViewBag.Error != null)
+    {
+        <div class="alert alert-danger">
+            <strong>Payment Error:</strong>
+            @ViewBag.Error
+        </div>
+    }
 
-        <p class="text-center">
-            To pay for your order, please proceed from your shopping cart.
-        </p>
+    @if (ViewBag.Message != null)
+    {
+        <div class="alert alert-info">
+            @ViewBag.Message
+        </div>
+    }
 
-        <a asp-controller="Cart"
-           asp-action="Index"
-           class="btn btn-primary">
-            Return to Shopping Cart
-        </a>
-    </div>
+    <a asp-controller="Cart"
+       asp-action="Index"
+       class="btn btn-secondary">
+        Return to Cart
+    </a>
 </div>

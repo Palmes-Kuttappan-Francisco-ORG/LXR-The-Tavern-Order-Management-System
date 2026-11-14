@@ -1,45 +1,61 @@
-
-@model CheckoutViewModel
+@model LXR_The_Tavern_Order_Management_System.Models.CheckoutViewModel
 
 @{
     ViewData["Title"] = "Checkout";
 }
 
-<h2>Checkout</h2>
+<div class="container mt-4">
+    <h2>Checkout</h2>
 
-<form asp-action="Checkout" method="post">
+    <form id="checkoutForm"
+          asp-controller="Cart"
+          asp-action="Checkout"
+          method="post">
 
-    <div class="form-group mb-3">
-        <label asp-for="Name">Customer Name</label>
-<input type="text" id="Name" name="Name"
-       class="form-control"
-       maxlength="100"
-       placeholder="Enter your full name" />
-<span asp-validation-for="Name" class="text-danger"></span>
-    </div>
+        @Html.AntiForgeryToken()
 
-    <div class="form-group mb-3">
-        <label asp-for="PaymentMethod">Payment Method</label>
+        <div class="form-group mb-3">
+            <label asp-for="Name">Customer Name</label>
+            <input asp-for="Name"
+                   class="form-control"
+                   maxlength="100"
+                   placeholder="Enter your full name" />
+            <span asp-validation-for="Name" class="text-danger"></span>
+        </div>
 
-        <select asp-for="PaymentMethod" class="form-control">
-            <option value="">-- Select Payment Method --</option>
-            <option value="Cash">Cash</option>
-            <option value="QRPH">QRPH</option>
-        </select>
+        <div class="form-group mb-3">
+            <label asp-for="PaymentMethod">Payment Method</label>
+            <select asp-for="PaymentMethod" class="form-control">
+                <option value="">-- Select Payment Method --</option>
+                <option value="Cash">Cash</option>
+                <option value="QRPH">QRPH (Maya)</option>
+            </select>
+            <span asp-validation-for="PaymentMethod" class="text-danger"></span>
+        </div>
 
-        <span asp-validation-for="PaymentMethod" class="text-danger"></span>
-    </div>
+        <button type="submit" class="btn btn-primary">
+            Continue
+        </button>
 
-    <button type="submit" class="btn btn-primary">
-        Place Order
-    </button>
-
-    <a asp-action="Index" class="btn btn-secondary">
-        Back to Cart
-    </a>
-
-</form>
+        <a asp-controller="Cart" asp-action="Index"
+           class="btn btn-secondary">
+            Back to Cart
+        </a>
+    </form>
+</div>
 
 @section Scripts {
     <partial name="_ValidationScriptsPartial" />
+
+    <script>
+        document.getElementById("checkoutForm").addEventListener("submit", function () {
+            const method = document.getElementById("PaymentMethod").value;
+
+            if (method === "QRPH") {
+                this.action = '@Url.Action("Checkout", "Payment")';
+            } else {
+                this.action = '@Url.Action("Checkout", "Cart")';
+            }
+        });
+    </script>
 }
