@@ -1,5 +1,4 @@
 
-cat > Views/Shared/_Layout.cshtml <<'EOF'
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -13,7 +12,7 @@ cat > Views/Shared/_Layout.cshtml <<'EOF'
 </head>
 <body>
     <header>
-        <nav class="navbar navbar-expand-sm navbar-toggleable-sm navbar-light bg-white border-bottom box-shadow mb-3">
+        <nav class="navbar navbar-expand-sm navbar-toggleable-sm navbar-dark tavern-header border-bottom box-shadow mb-3">
             <div class="container-fluid">
                 <a class="navbar-brand" asp-controller="Home" asp-action="Index">
                     LXR Tavern
@@ -32,32 +31,32 @@ cat > Views/Shared/_Layout.cshtml <<'EOF'
                      id="mainNavbar">
                     <ul class="navbar-nav flex-grow-1">
                         <li class="nav-item">
-                            <a class="nav-link text-dark"
+                            <a class="nav-link"
                                asp-controller="Home" asp-action="Index">Home</a>
                         </li>
 
                         <li class="nav-item">
-                            <a class="nav-link text-dark"
+                            <a class="nav-link"
                                asp-controller="Customers" asp-action="Index">Customers</a>
                         </li>
 
                         <li class="nav-item">
-                            <a class="nav-link text-dark"
+                            <a class="nav-link"
                                asp-controller="Cart" asp-action="Index">Cart</a>
                         </li>
 
                         <li class="nav-item">
-                            <a class="nav-link text-dark"
+                            <a class="nav-link"
                                asp-controller="MenuItems" asp-action="Index">Menu</a>
                         </li>
 
                         <li class="nav-item">
-                            <a class="nav-link text-dark"
+                            <a class="nav-link"
                                asp-controller="Home" asp-action="Privacy">Privacy</a>
                         </li>
 
                         <li class="nav-item">
-                            <a class="nav-link text-dark"
+                            <a class="nav-link"
                                asp-controller="Payment" asp-action="Index">Payment</a>
                         </li>
                     </ul>

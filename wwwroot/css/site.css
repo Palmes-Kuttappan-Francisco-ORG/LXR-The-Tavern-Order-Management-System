@@ -29,3 +29,17 @@ body {
 .form-floating > .form-control-plaintext:focus::placeholder, .form-floating > .form-control:focus::placeholder {
   text-align: start;
 }
+.tavern-header {
+    background-color: #3B2416 !important;
+    border-bottom: 3px solid #f5e2bc !important;
+}
+.tavern-header .navbar-brand {
+    color: #D4AF67 !important;
+    font-weight: bold;
+}
+.tavern-header .nav-link {
+    color: white !important;
+}
+.tavern-header .nav-link:hover {
+    color: #352503 !important;
+}
