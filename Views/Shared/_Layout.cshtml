@@ -12,11 +12,14 @@
 </head>
 <body>
     <header>
-        <nav class="navbar navbar-expand-sm navbar-toggleable-sm navbar-dark tavern-header border-bottom box-shadow mb-3">
+        <nav class="navbar navbar-expand-sm navbar-dark bg-black border-bottom box-shadow mb-3">
             <div class="container-fluid">
-                <a class="navbar-brand" asp-controller="Home" asp-action="Index">
-                    LXR Tavern
-                </a>
+                <a class="navbar-brand lxr-brand"
+   asp-area=""
+   asp-controller="Home"
+   asp-action="Index">
+    LXR Tavern
+</a>
 
                 <button class="navbar-toggler" type="button"
                         data-bs-toggle="collapse"
@@ -31,32 +34,32 @@
                      id="mainNavbar">
                     <ul class="navbar-nav flex-grow-1">
                         <li class="nav-item">
-                            <a class="nav-link"
+                            <a class="nav-link text-white"
                                asp-controller="Home" asp-action="Index">Home</a>
                         </li>
 
                         <li class="nav-item">
-                            <a class="nav-link"
+                            <a class="nav-link text-white"
                                asp-controller="Customers" asp-action="Index">Customers</a>
                         </li>
 
                         <li class="nav-item">
-                            <a class="nav-link"
+                            <a class="nav-link text-white"
                                asp-controller="Cart" asp-action="Index">Cart</a>
                         </li>
 
                         <li class="nav-item">
-                            <a class="nav-link"
+                            <a class="nav-link text-white"
                                asp-controller="MenuItems" asp-action="Index">Menu</a>
                         </li>
 
                         <li class="nav-item">
-                            <a class="nav-link"
+                            <a class="nav-link text-white"
                                asp-controller="Home" asp-action="Privacy">Privacy</a>
                         </li>
 
                         <li class="nav-item">
-                            <a class="nav-link"
+                            <a class="nav-link text-white"
                                asp-controller="Payment" asp-action="Index">Payment</a>
                         </li>
                     </ul>

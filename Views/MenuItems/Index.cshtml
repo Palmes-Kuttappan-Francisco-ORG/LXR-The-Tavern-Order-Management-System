@@ -36,9 +36,15 @@
            class="form-control"
            placeholder="Search food, drinks, or category...">
 </div>
-    <div class="row" id="menuItems">
+   @foreach (var category in Model.GroupBy(item => item.Category))
+{
+    <h2 class="fw-bold mt-4 mb-3 border-bottom pb-2">
+        @category.Key
+    </h2>
 
-        @foreach (var item in Model)
+    <div class="row menu-category">
+
+        @foreach (var item in category)
         {
             <div class="col-md-4 mb-4 menu-card">
 
@@ -86,10 +92,7 @@
                                        name="menuItemId"
                                        value="@item.Id" />
 
-                                <button type="submit"
-                                        class="btn btn-primary w-100">
-                                    Add to Cart
-                                </button>
+                                <button type="submit" class="btn btn-navy w-100">Add to Cart</button>
 
                             </form>
                         }
@@ -104,31 +107,20 @@
 
                         <div class="d-flex justify-content-between">
 
-                            <a asp-action="Edit"
-                               asp-route-id="@item.Id"
-                               class="btn btn-warning btn-sm">
-                                Edit
-                            </a>
+                            <a asp-action="Edit" asp-route-id="@item.Id"
+   class="btn btn-navy btn-sm">Edit</a>
 
-                            <a asp-action="Details"
-                               asp-route-id="@item.Id"
-                               class="btn btn-info btn-sm">
-                                Details
-                            </a>
+<a asp-action="Details" asp-route-id="@item.Id"
+   class="btn btn-navy btn-sm">Details</a>
 
-                            <a asp-action="Delete"
-                               asp-route-id="@item.Id"
-                               class="btn btn-danger btn-sm">
-                                Delete
-                            </a>
+<a asp-action="Delete" asp-route-id="@item.Id"
+   class="btn btn-danger btn-sm">Delete</a>
 
                         </div>
 
                     </div>
                 </div>
             </div>
-        }
-
+                }
     </div>
-
-</div>
+}

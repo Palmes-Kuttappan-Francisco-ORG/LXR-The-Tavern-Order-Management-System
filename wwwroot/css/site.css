@@ -43,3 +43,21 @@ body {
 .tavern-header .nav-link:hover {
     color: #352503 !important;
 }
+.btn-navy {
+    background-color: #172554;
+    color: white;
+    border: 1px solid #172554;
+}
+
+.btn-navy:hover {
+    background-color: #1e3a5f;
+    color: white;
+    border-color: #1e3a5f;
+}
+.lxr-brand {
+    font-family: "Segoe Script", "Brush Script MT", cursive;
+    font-size: 30px;
+    font-style: italic;
+    color: #D4AF37 !important;
+    font-weight: normal;
+}
