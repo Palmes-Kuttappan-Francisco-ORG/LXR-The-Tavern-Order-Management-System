@@ -5,13 +5,19 @@
     ViewData["Title"] = "Our Menu";
 }
 
-<div class="container mt-4">
 
-    <div class="text-center mb-4">
-        <h1>LXR Tavern</h1>
-        <h3>Our Food Menu</h3>
-        <p>Pick your meal and add to cart!</p>
-    </div>
+<div class="text-center mb-4">
+
+    <img src="~/images/tavern-logo.jpg"
+         alt="The Tavern Dine and Drinks Logo"
+         class="img-fluid"
+         style="max-width: 200px; width: 100%; height: auto;" />
+
+    <h3>Our Food Menu</h3>
+    <p>Pick an order and add to cart!</p>
+
+</div>
+
 
     <div class="mb-3">
         <a asp-action="Create" class="btn btn-success">
@@ -24,12 +30,17 @@
             View Cart
         </a>
     </div>
-
-    <div class="row">
+<div class="mb-3">
+    <input type="text"
+           id="searchMenu"
+           class="form-control"
+           placeholder="Search food, drinks, or category...">
+</div>
+    <div class="row" id="menuItems">
 
         @foreach (var item in Model)
         {
-            <div class="col-md-4 mb-4">
+            <div class="col-md-4 mb-4 menu-card">
 
                 <div class="card h-100 shadow-sm">
 
