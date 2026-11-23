@@ -1,0 +1,31 @@
+
+@{
+    ViewData["Title"] = "Thank You";
+}
+
+<div class="container text-center mt-5 mb-5">
+    <div class="card shadow p-5 mx-auto" style="max-width: 600px;">
+
+        <div class="mb-3">
+            <span style="font-size: 70px; color: #198754;">✓</span>
+        </div>
+
+        <h1 class="fw-bold mb-3">Thank You for Your Order!</h1>
+
+        <p class="text-muted fs-5">
+            Your payment has been successfully completed.
+        </p>
+
+        <p>
+            Hope we see you again at <strong>The Tavern</strong>.
+            We will prepare your order shortly.
+        </p>
+
+        <a asp-controller="MenuItems"
+           asp-action="Index"
+           class="btn btn-navy mt-3">
+            Back to Menu
+        </a>
+
+    </div>
+</div>

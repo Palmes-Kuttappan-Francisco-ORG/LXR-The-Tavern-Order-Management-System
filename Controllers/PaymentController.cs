@@ -86,30 +86,23 @@ namespace Lucas_The_Tavern_Order_Management_System.Controllers
 
                 _http.DefaultRequestHeaders.Authorization =
                     new AuthenticationHeaderValue("Basic", credentials);
+var baseUrl = _config["App:BaseUrl"];
 
-                var request = new MayaCheckout
-                {
-                    TotalAmount = new TotalAmount
-                    {
-                        Value = amount,
-                        Currency = "PHP"
-                    },
-                    RequestReferenceNumber = reference,
-                    RedirectUrl = new RedirectUrl
-                    {
-                        Success = Url.Action(
-                            nameof(Success), "Payment",
-                            new { orderId = order.Id }, Request.Scheme)!,
-
-                        Failure = Url.Action(
-                            nameof(Failed), "Payment",
-                            new { orderId = order.Id }, Request.Scheme)!,
-
-                        Cancel = Url.Action(
-                            nameof(Cancel), "Payment",
-                            new { orderId = order.Id }, Request.Scheme)!
-                    }
-                };
+var request = new MayaCheckout
+{
+    TotalAmount = new TotalAmount
+    {
+        Value = amount,
+        Currency = "PHP"
+    },
+    RequestReferenceNumber = reference,
+    RedirectUrl = new RedirectUrl
+    {
+        Success = $"{baseUrl}/Payment/Success?orderId={order.Id}",
+        Failure = $"{baseUrl}/Payment/Failed",
+        Cancel = $"{baseUrl}/Payment/Cancel"
+    }
+};
 
                 const string mayaUrl =
                     "https://pg-sandbox.paymaya.com/checkout/v1/checkouts";
@@ -203,20 +196,26 @@ namespace Lucas_The_Tavern_Order_Management_System.Controllers
 
                 string paymentStatus = "";
 
-                if (root.TryGetProperty("paymentStatus", out var paymentStatusElement))
-                    paymentStatus = paymentStatusElement.GetString() ?? "";
+if (root.TryGetProperty("paymentStatus", out var paymentStatusElement))
+{
+    paymentStatus = paymentStatusElement.GetString() ?? "";
+}
+else if (root.TryGetProperty("status", out var statusElement))
+{
+    paymentStatus = statusElement.GetString() ?? "";
+}
 
                 if (paymentStatus == "PAYMENT_SUCCESS")
                 {
                     order.PaymentStatus = "Paid";
 
-                    // Clear the cart only after Maya confirms payment.
+                    
                     var cartItems = await _db.CartItems.ToListAsync();
                     _db.CartItems.RemoveRange(cartItems);
 
                     await _db.SaveChangesAsync();
 
-                    ViewBag.Message = "Payment successful. Thank you for your order!";
+                 return View("ThankYou", order);
                 }
                 else if (paymentStatus == "PAYMENT_FAILED" ||
                          paymentStatus == "PAYMENT_EXPIRED" ||
@@ -228,10 +227,10 @@ namespace Lucas_The_Tavern_Order_Management_System.Controllers
                     ViewBag.Error = "Payment was not completed. Your cart has been preserved.";
                 }
                 else
-                {
-                    ViewBag.Message =
-                        "Your payment is still pending. Please check again shortly.";
-                }
+{
+    ViewBag.Message =
+        "Maya payment status: " + paymentStatus;
+}
 
                 return View("Index");
             }
